@@ -21,10 +21,10 @@ import java.util.HashMap;
         transactionManagerRef = "oracleTransactionManager"
 )
 @EntityScan(basePackages = "com.ucieda.twodbs.entity.oracle") // Paquete de entidades Oracle
+@ConfigurationProperties(prefix = "spring.datasource.oracle")
 public class OracleConfig {
 
     @Bean(name = "oracleDataSource")
-    @ConfigurationProperties(prefix = "spring.datasource.oracle")
     public DataSource oracleDataSource() {
         return DataSourceBuilder.create().build();
     }

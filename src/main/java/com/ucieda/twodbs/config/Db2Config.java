@@ -22,11 +22,11 @@ import java.util.HashMap;
         transactionManagerRef = "db2TransactionManager"
 )
 @EntityScan(basePackages = "com.ucieda.twodbs.entity..db2") // Paquete donde estarán las entidades de DB2
+@ConfigurationProperties(prefix = "spring.datasource.db2")
 public class Db2Config {
 
     @Primary
     @Bean(name = "db2DataSource")
-    @ConfigurationProperties(prefix = "spring.datasource.db2")
     public DataSource db2DataSource() {
         return DataSourceBuilder.create().build();
     }
