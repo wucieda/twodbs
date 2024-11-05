@@ -21,10 +21,10 @@ import java.util.HashMap;
         transactionManagerRef = "oracleTransactionManager"
 )
 @EntityScan(basePackages = "com.ucieda.twodbs.entity.oracle") // Paquete de entidades Oracle
-@ConfigurationProperties(prefix = "spring.datasource.oracle")
 public class OracleConfig {
 
     @Bean(name = "oracleDataSource")
+    @ConfigurationProperties(prefix = "spring.datasource.oracle")
     public DataSource oracleDataSource() {
         return DataSourceBuilder.create().build();
     }
@@ -39,7 +39,7 @@ public class OracleConfig {
         em.setJpaVendorAdapter(vendorAdapter);
 
         HashMap<String, Object> properties = new HashMap<>();
-        properties.put("hibernate.dialect", "org.hibernate.dialect.OracleDialect");
+        properties.put("hibernate.dialect", "org.hibernate.dialect.Oracle12cDialect");
         em.setJpaPropertyMap(properties);
 
         return em;

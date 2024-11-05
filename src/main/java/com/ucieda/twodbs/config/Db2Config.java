@@ -21,12 +21,12 @@ import java.util.HashMap;
         entityManagerFactoryRef = "db2EntityManagerFactory",
         transactionManagerRef = "db2TransactionManager"
 )
-@EntityScan(basePackages = "com.ucieda.twodbs.entity..db2") // Paquete donde estarán las entidades de DB2
-@ConfigurationProperties(prefix = "spring.datasource.db2")
+@EntityScan(basePackages = "com.ucieda.twodbs.entity.db2") // Paquete donde estarán las entidades de DB2
 public class Db2Config {
 
     @Primary
     @Bean(name = "db2DataSource")
+    @ConfigurationProperties(prefix = "spring.datasource.db2")
     public DataSource db2DataSource() {
         return DataSourceBuilder.create().build();
     }
@@ -43,6 +43,8 @@ public class Db2Config {
 
         HashMap<String, Object> properties = new HashMap<>();
         properties.put("hibernate.dialect", "org.hibernate.dialect.DB2Dialect");
+        properties.put("hibernate.hbm2ddl.auto", "update"); // O el valor que necesites
+        properties.put("hibernate.show_sql", true); // Para mostrar las consultas SQL en la consola
         em.setJpaPropertyMap(properties);
 
         return em;
